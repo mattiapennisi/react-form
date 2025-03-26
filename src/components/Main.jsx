@@ -5,6 +5,7 @@ export default function Main() {
 
     const [articlesList, setArticlesList] = useState(articles)
     const [articleTitleValue, setArticleTitleValue] = useState('')
+    const [articleToEdit, setArticleToEdit] = useState(null)
 
     function handleSubmit(e) {
         e.preventDefault()
@@ -22,12 +23,13 @@ export default function Main() {
         }
     }
 
-    function handleTitleEdit() {
-
+    function handleTitleEdit(articleId) {
+        const articleToEdit = articlesList.find(article => article.id === articleId)
+        setArticleToEdit(articleToEdit)
     }
 
-    function handleArticleDelete(articleTitle) {
-        const updatedArticlesList = articlesList.filter(article => article.title != articleTitle)
+    function handleArticleDelete(articleId) {
+        const updatedArticlesList = articlesList.filter(article => article.id !== articleId)
         setArticlesList(updatedArticlesList)
     }
 
@@ -40,11 +42,11 @@ export default function Main() {
                         return <li key={article.id}>
                             {article.title}
                             <div>
-                                <div onClick={() => handleTitleEdit()}>
-                                    <i class="fa-solid fa-pen"></i>
+                                <div onClick={() => handleTitleEdit(article.id)}>
+                                    <i className="fa-solid fa-pen"></i>
                                 </div>
-                                <div onClick={() => handleArticleDelete(article.title)}>
-                                    <i class="fa-solid fa-trash"></i>
+                                <div onClick={() => handleArticleDelete(article.id)}>
+                                    <i className="fa-solid fa-trash"></i>
                                 </div>
                             </div>
                         </li>
@@ -65,6 +67,7 @@ export default function Main() {
                 >
                     Submit
                 </button>
+                <div>{articleToEdit}</div>
 
             </form>
 

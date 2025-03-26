@@ -5,7 +5,7 @@ import './css/resets.css'
 import './css/utilities.css'
 import './css/media.css'
 import './index.css'
-import './app.css'
+import './App.css'
 import App from './App.jsx'
 
 createRoot(document.getElementById('root')).render(
