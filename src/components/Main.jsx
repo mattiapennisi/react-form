@@ -9,14 +9,26 @@ export default function Main() {
     function handleSubmit(e) {
         e.preventDefault()
 
-        const newArticle = {
-            id: articlesList.length + 1,
-            title: articleTitleValue,
-            body: '',
-        }
+        if (articleTitleValue.length > 0) {
 
-        setArticlesList([...articlesList, newArticle])
-        setArticleTitleValue('')
+            const newArticle = {
+                id: articlesList.length + 1,
+                title: articleTitleValue,
+                body: '',
+            }
+
+            setArticlesList([...articlesList, newArticle])
+            setArticleTitleValue('')
+        }
+    }
+
+    function handleTitleEdit() {
+
+    }
+
+    function handleArticleDelete(articleTitle) {
+        const updatedArticlesList = articlesList.filter(article => article.title != articleTitle)
+        setArticlesList(updatedArticlesList)
     }
 
     return (
@@ -28,14 +40,13 @@ export default function Main() {
                         return <li key={article.id}>
                             {article.title}
                             <div>
-                                <div>
+                                <div onClick={() => handleTitleEdit()}>
                                     <i class="fa-solid fa-pen"></i>
                                 </div>
-                                <div>
+                                <div onClick={() => handleArticleDelete(article.title)}>
                                     <i class="fa-solid fa-trash"></i>
                                 </div>
                             </div>
-
                         </li>
                     })
                 }
