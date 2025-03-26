@@ -3,19 +3,20 @@ import articles from '../../data/articles.js'
 
 export default function Main() {
 
-    const [articleTitleValue, setArticleTitleValue] = useState('')
     const [articlesList, setArticlesList] = useState(articles)
-
-    const newArticle = {
-        id: articlesList.length + 1,
-        title: {articleTitleValue},
-        body: '',
-    }
+    const [articleTitleValue, setArticleTitleValue] = useState('')
 
     function handleSubmit(e) {
         e.preventDefault()
 
-    articlesList = [...articlesList, newArticle]
+        const newArticle = {
+            id: articlesList.length + 1,
+            title: articleTitleValue,
+            body: '',
+        }
+
+        setArticlesList([...articlesList, newArticle])
+        setArticleTitleValue('')
     }
 
     return (
@@ -23,13 +24,13 @@ export default function Main() {
             <ul>
                 <h2>Articles List</h2>
                 {
-                    articles.map(article => {
-                        return <li>{article.title}</li>
+                    articlesList.map(article => {
+                        return <li key={article.id}>{article.title}</li>
                     })
                 }
             </ul>
 
-            <form id='articlesForm' action="" onSubmit={handleSubmit}>
+            <form id='articlesForm' onSubmit={handleSubmit}>
 
                 <input
                     type="text"
@@ -39,7 +40,6 @@ export default function Main() {
 
                 <button
                     type="submit"
-
                 >
                     Submit
                 </button>
