@@ -25,7 +25,18 @@ export default function Main() {
                 <h2>Articles List</h2>
                 {
                     articlesList.map(article => {
-                        return <li key={article.id}>{article.title}</li>
+                        return <li key={article.id}>
+                            {article.title}
+                            <div>
+                                <div>
+                                    <i class="fa-solid fa-pen"></i>
+                                </div>
+                                <div>
+                                    <i class="fa-solid fa-trash"></i>
+                                </div>
+                            </div>
+
+                        </li>
                     })
                 }
             </ul>
